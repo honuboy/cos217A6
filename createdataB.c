@@ -19,6 +19,7 @@
 */
 int main(void)
 {
+    /* open a file that will be written to in write binary mode */
     FILE *f = fopen("dataB", "wb");
 
     /* return error if file can't be opened */
