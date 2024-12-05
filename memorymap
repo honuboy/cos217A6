@@ -105,3 +105,38 @@ Epilog and return 0
 0x4008c4 <main+104>:         mov     w0, #0x0                        // #0
 0x4008c8 <main+108>:         ldp     x19, x30, [sp], #16
 0x4008cc <main+112>:         ret
+
+DATA:
+
+Address (in hex)	Content (in hex)	Description
+0x420044            0x44                grade = 'D'
+
+BSS:
+
+**Not sure about this one, do I need to show the other bytes that are 0s?**
+
+Address (in hex)	Description
+0x420058            'J'
+0x420059            'o'
+0x420060            'n'
+0x420061            'a'
+0x420062            'h'            
+0x420063            'j'
+0x420064            'e'
+0x420065            'f'
+0x420066            'f'
+
+STACK:
+
+Offset              Description
+0                   x19
+8                   x20
+16                  x21
+24                  x30
+32                  buf[0]-buf[7]
+40                  buf[8]-buf[15]
+48                  buf[16]-buf[23]
+56                  buf[24]-buf[31]
+64                  buf[32]-buf[39]
+72                  buf[40]-buf[47]
+80                  getName's x30
