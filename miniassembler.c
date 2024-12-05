@@ -24,10 +24,10 @@ static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int uiNumBits)
 {
    uiSrc = uiSrc >> uiSrcStartBit;
-   uiSrc = uiSrc << uiDestStartBit;
-
+  
+   uiSrc = uiSrc << (uiNumBits + uiDestStartBit - 1);
+   uiSrc = uiSrc >> (uiNumBits - 1);
    
-
    *puiDest = *puiDest | uiSrc;
 
 }
@@ -108,7 +108,7 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
    uiDisp = (unsigned int)(ulAddr - ulAddrOfThisInstr);
 
    /* register to be inserted in instruction */
-   setField(uiDisp, 2, iInstr, 0, 26);
+   setField(uiDisp, 2, &uiInstr, 0, 26);
 
    return uiInstr;
 
