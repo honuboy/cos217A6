@@ -9,7 +9,6 @@ First loop setup
 0x4007d0 <readString+12>:    adrp    x21, 0x420000 <__libc_start_main@got.plt>
 
 First loop
-// see line 4007fc, branches back here
 0x4007d4 <readString+16>:    mov     w20, w19
 0x4007d8 <readString+20>:    ldr     x0, [x21, #72]
 0x4007dc <readString+24>:    bl      0x400640 <fgetc@plt>
