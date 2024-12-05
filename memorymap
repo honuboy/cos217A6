@@ -112,8 +112,6 @@ Address (in hex)	Content (in hex)	Description
 
 BSS:
 
-**Not sure about this one, do I need to show the other bytes that are 0s?**
-
 Address (in hex)	Description
 0x420058            'J'
 0x420059            'o'
