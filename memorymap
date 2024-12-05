@@ -48,10 +48,10 @@ Epilog and return
 
 Prolog
 0x400840 <getName>:          str     x30, [sp, #-16]!
-0x400844 <getName+4>:        adrp    x0, 0x400000
-0x400848 <getName+8>:        add     x0, x0, #0x8f8
 
 printf("What is your name?\n");
+0x400844 <getName+4>:        adrp    x0, 0x400000
+0x400848 <getName+8>:        add     x0, x0, #0x8f8
 0x40084c <getName+12>:       bl      0x400670 <puts@plt>
 
 readString();
