@@ -23,10 +23,12 @@ static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int *puiDest, unsigned int uiDestStartBit,
                      unsigned int uiNumBits)
 {
-   uiSrc = uiSrc >> uiSrcStartBit;
+   /* */
   
-   uiSrc = uiSrc << (uiNumBits + uiDestStartBit - 1);
-   uiSrc = uiSrc >> (uiNumBits - 1);
+   uiSrc = uiSrc << (32 - uiNumBits - uiSrcStartBit);
+   uiSrc = uiSrc >> (32 - uiNumBits);
+
+   uiSrc = uiSrc << uiDestStartBit;
    
    *puiDest = *puiDest | uiSrc;
 
