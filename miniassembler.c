@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* miniassembler.c                                                    */
-/* Author: Bob Dondero, Donna Gabai                                   */
+/* Author: Bob Dondero, Donna Gabai, Jonah Johnson, Jeffrey Xu        */
 /*--------------------------------------------------------------------*/
 
 #include "miniassembler.h"
@@ -19,14 +19,21 @@
 
    /* Use bitwise or, single pipe; get rid of stuff on the left, rid of stuff
    on the right; just work with the instruction */
+
+const unsigned int INSTRLEN = 32;
+
 static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int *puiDest, unsigned int uiDestStartBit,
                      unsigned int uiNumBits)
 {
-   /* */
+   /*uiSrc is shifted to the left to erase the unwanted digits that are 
+   more significant than needed, and shifts to the right to wipe the 
+   rightmost unwanted digits. Finally it shifts the uiSrc into the 
+   correct position where it can be "added" to the instruction (puiDest)
+   with the OR operand*/
   
-   uiSrc = uiSrc << (32 - uiNumBits - uiSrcStartBit);
-   uiSrc = uiSrc >> (32 - uiNumBits);
+   uiSrc = uiSrc << (INSTRLEN - uiNumBits - uiSrcStartBit);
+   uiSrc = uiSrc >> (INSTRLEN - uiNumBits);
 
    uiSrc = uiSrc << uiDestStartBit;
    
