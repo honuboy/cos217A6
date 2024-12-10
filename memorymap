@@ -122,6 +122,18 @@ Address (in hex)	Description
 0x42005e            'e'
 0x42005f            'f'
 0x420060            'f'
+0x420061            '\0'
+0x420062            '0'
+0x420063            '0'
+...
+0x420077            '0'
+0x420078            MiniAssembler_mov(0, 'A')
+...
+0x42007c            MiniAssembler_adr(1, 0x420044, 0x42007c)
+...
+0x420080            MiniAssembler_strb(0, 1)
+...
+0x420084            MiniAssembler_b(0x40089c, 0x420084)
 
 STACK:
 
