@@ -122,3 +122,23 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
    return uiInstr;
 
 }
+
+/*--------------------------------------------------------------------*/
+
+unsigned int MiniAssembler_bl(unsigned long ulAddr,
+   unsigned long ulAddrOfThisInstr)
+{
+   unsigned int uiInstr;
+   unsigned int uiDisp;
+
+   /* Base Instruction Code */
+   uiInstr = 0x94000000;
+
+   uiDisp = (unsigned int)(ulAddr - ulAddrOfThisInstr);
+
+   /* register to be inserted in instruction */
+   setField(uiDisp, 2, &uiInstr, 0, 26);
+
+   return uiInstr;
+
+}
