@@ -2,12 +2,6 @@
 /* createdataAplus.c                                                  */
 /* Author: Jonah Johnson, Jeffrey Xu                                  */
 /*--------------------------------------------------------------------*/
-
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include "miniassembler.h"
-
 /*
   Produces a file called dataAplus with the student name, a nullbyte, 
   padding to overrun the stack, with the assembly code to overwrite
@@ -16,6 +10,11 @@
   printf the character A (followed by null bytes, as printf only takes
   strings as arguments).
 */
+
+#include <stdio.h>
+#include <stdint.h>
+#include "miniassembler.h"
+
 
 /* Writes a file 'dataAplus' to influence the grader program's behavior 
    and get an A+. No command-line arguments, stdin reads, or stdout/

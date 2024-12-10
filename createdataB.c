@@ -2,16 +2,16 @@
 /* createdataB.c                                                      */
 /* Author: Jonah Johnson, Jeffrey Xu                                  */
 /*--------------------------------------------------------------------*/
-
-#include <stdio.h>
-#include <stdint.h>
-
 /*
   Produces a file called dataB with the student name, a nullbyte, 
   padding to overrun the stack, and the address of the instruction in
   main to get a B, the latter of which will overwrite getName's stored 
   x30.
 */
+
+#include <stdio.h>
+#include <stdint.h>
+
 
 /* Writes a file 'dataB' to influence the grader program's behavior and
    get a B. No command-line arguments, stdin reads, or stdout/stderr 

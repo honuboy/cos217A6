@@ -2,18 +2,17 @@
 /* createdataA.c                                                      */
 /* Author: Jonah Johnson, Jeffrey Xu                                  */
 /*--------------------------------------------------------------------*/
-
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include "miniassembler.h"
-
 /*
   Produces a file called dataA with the student name, a nullbyte, 
   padding to overrun the stack, with the assembly code to overwrite
   the 'D' in data with an 'A', which causes the grade to be returned
   to be an A
 */
+
+#include <stdio.h>
+#include <stdint.h>
+#include "miniassembler.h"
+
 
 /* Writes a file 'dataA' to influence the grader program's behavior and
    get a A. No command-line arguments, stdin reads, or stdout/stderr 

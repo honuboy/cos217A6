@@ -134,6 +134,7 @@ Address (in hex)	Description
 0x420080            MiniAssembler_strb(0, 1)
 ...
 0x420084            MiniAssembler_b(0x40089c, 0x420084)
+...
 
 STACK:
 

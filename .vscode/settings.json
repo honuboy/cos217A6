@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "miniassembler.h": "c",
+        "stdint.h": "c"
+    }
+}
