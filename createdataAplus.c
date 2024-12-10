@@ -54,7 +54,7 @@ int main(void)
     }
 
     /* writes the instructions to print the 'A' char to file*/
-    movInstr = MiniAssembler_mov(0, 0x42006c);
+    movInstr = MiniAssembler_adr(0, 0x42006c, 0x420070);
     fwrite(&movInstr, sizeof(unsigned int), 1, f);
     bInstr = MiniAssembler_bl(0x400690, 0x420074);
     fwrite(&bInstr, sizeof(unsigned int), 1, f);
@@ -71,7 +71,7 @@ int main(void)
 
     
     /* writes address of instruction in main to get an A; see memmap */
-    ulAddr = 0x420078;
+    ulAddr = 0x420070;
     fwrite(&ulAddr, sizeof(unsigned long), 1, f);
 
     fclose(f);
